@@ -30,6 +30,14 @@ class DNA_Test(unittest.TestCase):
         self.assertNotEqual(dna, mutated_dna)
         self.assertEquals(len(dna.structure), len(mutated_dna.structure))
 
+    def test_dna_crossover(self):
+        dna1 = DNA("asdfghjkl")
+        dna2 = DNA("qwertyuio")
+        crossover_points = 2
+        child1 = dna1.crossover(dna2, crossover_points)
+        child2 = dna2.crossover(dna1, crossover_points)
+        self.assertNotEqual(child1, child2)
+        self.assertEqual(len(child1.structure), len(child2.structure))
 
 if __name__ == '__main__':
     unittest.main()

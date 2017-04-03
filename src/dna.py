@@ -32,6 +32,11 @@ class DNA(object):
         mutated_structure = generate_mutated_structure(original_structure, mutate_indices, mutation_values)
         return DNA(mutated_structure)
 
+    def crossover(self, other, crossover_points=2):
+        crossover_points = self.generate_crossover_points(crossover_points)
+        child_structure = self.generate_breed(crossover_points, other)
+        return DNA(child_structure)
+
     def generate_random_mutation(self, nucleotides, percentage):
         mutate_count = self.calculate_mutate_count(percentage)
         nucleotides_values = random.sample(nucleotides.nucleotides, mutate_count)
@@ -45,3 +50,13 @@ class DNA(object):
     def calculate_mutate_count(self, percentage):
         mutate_count = len(self.structure) * percentage / 100
         return mutate_count
+
+    def generate_crossover_points(self, crossover_points):
+        crossover_indices = random.sample(xrange(len(self.structure)), crossover_points)
+        crossover_indices.sort()
+        return crossover_indices
+
+    def generate_breed(self, indices, other):
+        return self.structure[:indices[0]] + \
+               other.structure[indices[0]:indices[1]] + \
+               self.structure[indices[1]:]
