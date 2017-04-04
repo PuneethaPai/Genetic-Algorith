@@ -10,6 +10,7 @@ class PopulationTest(unittest.TestCase):
         population1 = Population(people=people)
         population2 = Population(people=people)
         self.assertEquals(population1, population2)
+        self.assertEquals(population1.__hash__(), population2.__hash__())
 
     def test_population_with_different_people_are_not_equal(self):
         dna1 = DNA("asdfghjk")

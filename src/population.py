@@ -11,17 +11,17 @@ class Population(object):
         self.fitness = []
 
     def __eq__(self, other):
-        identity1 = self.identify_people()
-        identity2 = other.identify_people()
+        identity1 = self.__identify_people()
+        identity2 = other.__identify_people()
         return identity1 == identity2
 
-    def calculate_fitness(self, target):
-        self.fitness = [DNA.measure_fitness(target) for DNA in self.people]
+    def __hash__(self):
+        return str(self.__identify_people()).__hash__()
 
     def next_population(self, target, kill_percentage=kill_percentage):
         self.calculate_fitness(target)
         self.sort()
         return Population(self.people[:(100 - kill_percentage) * self.size])
 
-    def identify_people(self):
+    def __identify_people(self):
         return collections.Counter(self.people)
