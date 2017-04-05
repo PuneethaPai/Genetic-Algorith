@@ -1,4 +1,7 @@
 import random
+import string
+
+from nucleotides import Nucleotides
 
 
 def generate_mutated_structure(structure, indices, mutation_values):
@@ -9,6 +12,8 @@ def generate_mutated_structure(structure, indices, mutation_values):
 
 
 class DNA(object):
+    nucleotides = Nucleotides(string.printable)
+
     def __init__(self, structure):
         self.structure = structure
 
@@ -16,7 +21,7 @@ class DNA(object):
         return self.structure == other.structure
 
     def __hash__(self):
-        return self.structure.__hash__();
+        return self.structure.__hash__()
 
     def measure_fitness(self, target):
         fitness = 0
@@ -25,38 +30,38 @@ class DNA(object):
                 fitness += 1
         return fitness
 
-    def mutate(self, percentage, nucleotides):
+    def mutate(self, percentage=10, space_of_possibilities=nucleotides):
         original_structure = list(self.structure)
-        mutate_indices = self.generate_mutable_indices(percentage)
-        mutation_values = self.generate_random_mutation(nucleotides, percentage)
+        mutate_indices = self.__generate_mutable_indices(percentage)
+        mutation_values = self.__generate_random_mutation(space_of_possibilities, percentage)
         mutated_structure = generate_mutated_structure(original_structure, mutate_indices, mutation_values)
         return DNA(mutated_structure)
 
     def crossover(self, other, crossover_points=2):
-        crossover_points = self.generate_crossover_points(crossover_points)
-        child_structure = self.generate_breed(crossover_points, other)
+        crossover_points = self.__generate_crossover_points(crossover_points)
+        child_structure = self.__generate_breed(crossover_points, other)
         return DNA(child_structure)
 
-    def generate_random_mutation(self, nucleotides, percentage):
-        mutate_count = self.calculate_mutate_count(percentage)
+    def __generate_random_mutation(self, nucleotides, percentage):
+        mutate_count = self.__calculate_mutate_count(percentage)
         nucleotides_values = random.sample(nucleotides.nucleotides, mutate_count)
         return nucleotides_values
 
-    def generate_mutable_indices(self, percentage):
-        mutate_count = self.calculate_mutate_count(percentage)
+    def __generate_mutable_indices(self, percentage):
+        mutate_count = self.__calculate_mutate_count(percentage)
         mutate_indices = random.sample(xrange(len(self.structure)), mutate_count)
         return mutate_indices
 
-    def calculate_mutate_count(self, percentage):
+    def __calculate_mutate_count(self, percentage):
         mutate_count = len(self.structure) * percentage / 100
         return mutate_count
 
-    def generate_crossover_points(self, crossover_points):
+    def __generate_crossover_points(self, crossover_points):
         crossover_indices = random.sample(xrange(len(self.structure)), crossover_points)
         crossover_indices.sort()
         return crossover_indices
 
-    def generate_breed(self, indices, other):
+    def __generate_breed(self, indices, other):
         return self.structure[:indices[0]] + \
                other.structure[indices[0]:indices[1]] + \
                self.structure[indices[1]:]
