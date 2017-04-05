@@ -15,8 +15,11 @@ class PopulationTest(unittest.TestCase):
     def test_population_to_generate_improved_next_population(self):
         people = [DNA("asdfghjk"), DNA("qwerthjk"), DNA("abcdefqw")] * 50
         population = Population(people=people)
-        next_population = population.next_population(target=DNA("abcdefqw"), kill_percentage=80)
+        next_population = population.next_population(target=DNA("abcdefqw"))
         self.assertNotEqual(population, next_population)
+        self.assertEqual(len(population.people), len(next_population.people))
+
+
 
 
 

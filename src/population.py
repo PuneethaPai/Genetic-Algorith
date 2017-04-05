@@ -1,23 +1,38 @@
 import collections
+import random
+
+from dna import DNA
 
 PERCENT = 100.00
 
 
 class Population(object):
-    size = 150
     kill_percentage = 20
+    mutate_percent = 10
 
     def __init__(self, people):
         self.people = people
         self.size = len(self.people)
         self.fitness = []
 
-    def next_population(self, target, kill_percentage=kill_percentage):
+    def next_population(self, target):
+        self.__calculate_worthiness(target)
+        best_people, split_index = self.__kill_unworthy()
+        next_generation_people = self.__create_next_generation(best_people, split_index)
+        mutated_generation_people = self.__mutate(next_generation_people)
+        return Population(mutated_generation_people)
+
+    def __calculate_worthiness(self, target):
         self.__calculate_fitness(target)
         self.__sort()
-        split_index = int((PERCENT - kill_percentage) / 100 * self.size)
-        next_people = self.people[:split_index]
-        return Population(next_people)
+
+    def __create_next_generation(self, best_people, split_index):
+        return best_people + self.__create(self.size - split_index, best_people)
+
+    def __kill_unworthy(self):
+        split_index = int((PERCENT - self.kill_percentage) / 100 * self.size)
+        best_people = self.people[:split_index]
+        return best_people, split_index
 
     def __eq__(self, other):
         identity1 = self.__identify_people()
@@ -39,3 +54,17 @@ class Population(object):
         self.fitness = [item[0] for item in fitness_based]
         self.people.reverse()
         self.fitness.reverse()
+
+    def __create(self, required_size, best_people):
+        required_population = [self.__child(best_people) for i in xrange(required_size)]
+        return required_population
+
+    def __child(self, best_people):
+        parents = random.sample(best_people, 2)
+        return parents[0].crossover(parents[1])
+
+    def __mutate(self, people):
+        mutable_people_index = random.sample(xrange(self.size), self.mutate_percent / self.size)
+        for index in mutable_people_index:
+            people[index] = people[index].mutate()
+        return people
