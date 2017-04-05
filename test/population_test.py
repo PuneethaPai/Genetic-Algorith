@@ -12,26 +12,11 @@ class PopulationTest(unittest.TestCase):
         self.assertEquals(population1, population2)
         self.assertEquals(population1.__hash__(), population2.__hash__())
 
-    def test_population_with_different_people_are_not_equal(self):
-        dna1 = DNA("asdfghjk")
-        dna2 = DNA("qwertyuy")
-        dna3 = DNA("zxcvbnqw")
-        people1 = [dna1, dna2]
-        people2 = [dna3, dna2]
-        population1 = Population(people=people1)
-        population2 = Population(people=people2)
-        self.assertFalse(population1.__eq__(population2))
-
-    def test_fitness_calculatoin_of_people(self):
-        people = [DNA("asdfghjk"), DNA("asdfghjk"), DNA("abcdefqw")]
+    def test_population_to_generate_improved_next_population(self):
+        people = [DNA("asdfghjk"), DNA("qwerthjk"), DNA("abcdefqw")] * 50
         population = Population(people=people)
-        population.calculate_fitness(DNA("abcdefgh"))
-        self.assertEquals(population.fitness[0], population.fitness[1])
-        self.assertTrue(population.fitness[2] > population.fitness[1])
-
-
-
-
+        next_population = population.next_population(target=DNA("abcdefqw"), kill_percentage=80)
+        self.assertNotEqual(population, next_population)
 
 
 
