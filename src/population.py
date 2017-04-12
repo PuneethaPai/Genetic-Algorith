@@ -1,8 +1,6 @@
 import collections
 import random
 
-from dna import DNA
-
 PERCENT = 100.00
 
 

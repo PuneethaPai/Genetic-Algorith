@@ -44,7 +44,7 @@ class DNA(object):
 
     def __generate_random_mutation(self, nucleotides, percentage):
         mutate_count = self.__calculate_mutate_count(percentage)
-        nucleotides_values = random.sample(nucleotides.nucleotides, mutate_count)
+        nucleotides_values = nucleotides.create(mutate_count)
         return nucleotides_values
 
     def __generate_mutable_indices(self, percentage):
