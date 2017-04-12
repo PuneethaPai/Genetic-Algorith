@@ -19,6 +19,13 @@ class NucleotidesTest(unittest.TestCase):
         self.assertNotEqual(nucleotides1, nucleotides2)
         self.assertNotEqual(nucleotides1.__hash__(), nucleotides2.__hash__())
 
+    def test_nucleotides_generate_structure(self):
+        space = set("asdfghjkiytfvygjmv")
+        nucleotides = Nucleotides(space)
+        structure = nucleotides.create(size=10)
+        self.assertEquals(len(structure), 10)
+
+
 
 if __name__ == '__main__':
     unittest.main()
