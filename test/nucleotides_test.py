@@ -25,7 +25,11 @@ class NucleotidesTest(unittest.TestCase):
         structure = nucleotides.create(size=10)
         self.assertEquals(len(structure), 10)
 
-
+    def test_nucleotides_generate_structure_greater_than_available_space(self):
+        space = set("asdfghj")
+        nucleotides = Nucleotides(space)
+        structure = nucleotides.create(size=10)
+        self.assertEquals(len(structure), 10)
 
 if __name__ == '__main__':
     unittest.main()

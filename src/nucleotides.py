@@ -1,5 +1,6 @@
 import random
 
+
 class Nucleotides(object):
     def __init__(self, nucleotides):
         self.nucleotides = nucleotides
@@ -11,5 +12,13 @@ class Nucleotides(object):
         return ''.join(self.nucleotides).__hash__()
 
     def create(self, size):
-        structure = ''.join(random.sample(self.nucleotides, size))
+        space = self.get_space_for(size)
+        structure = ''.join(random.sample(space, size))
         return structure
+
+    def get_space_for(self, size):
+        space = list(self.nucleotides)
+        multiple = size / len(self.nucleotides) + 1
+        space *= multiple
+        random.shuffle(space)
+        return space
