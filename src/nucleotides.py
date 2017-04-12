@@ -12,11 +12,11 @@ class Nucleotides(object):
         return ''.join(self.nucleotides).__hash__()
 
     def create(self, size):
-        space = self.get_space_for(size)
+        space = self.__get_space_for(size)
         structure = ''.join(random.sample(space, size))
         return structure
 
-    def get_space_for(self, size):
+    def __get_space_for(self, size):
         space = list(self.nucleotides)
         multiple = size / len(self.nucleotides) + 1
         space *= multiple
