@@ -62,7 +62,7 @@ class Population(object):
         return parents[0].crossover(parents[1])
 
     def __mutate(self, people):
-        mutable_people_index = random.sample(xrange(self.size), self.mutate_percent / self.size)
+        mutable_people_index = random.sample(xrange(self.size), self.mutate_percent * self.size / 100)
         for index in mutable_people_index:
             people[index] = people[index].mutate()
         return people

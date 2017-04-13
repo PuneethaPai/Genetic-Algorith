@@ -8,5 +8,5 @@ class PopulationInitialise(object):
         DNA.nucleotides = nucleotides
 
     def create(self, population_size=100, structure_size=10):
-        people = [self.nucleotides.create(size=structure_size) for i in xrange(population_size)]
+        people = [DNA(self.nucleotides.create(size=structure_size)) for i in xrange(population_size)]
         return Population(people=people)
