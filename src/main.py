@@ -1,4 +1,5 @@
 import string
+import matplotlib.pyplot as plt
 
 from dna import DNA
 from generation import Generation
@@ -6,22 +7,32 @@ from nucleotides import Nucleotides
 from population import Population
 from population_initialise import PopulationInitialise
 
-target = DNA("Puneeth did Implement!!")
+target = DNA("I can do anything!!")
 target_length = len(target.structure)
-nucleotides = Nucleotides(string.letters + ' !')
+nucleotides = Nucleotides(string.letters + ') -!;')
 DNA.nucleotides = nucleotides
 Population.kill_percentage = 50
-Population.mutate_percent = 10
+Population.mutate_percent = 50
 population_initialise = PopulationInitialise(nucleotides)
 
 first_population = population_initialise.create(population_size=150, structure_size=target_length)
 
 generations = [Generation(number=1, population=first_population)]
 
-for i in xrange(1000):
+iteration = 0
+while True:
     if generations[-1].population.people[0] == target:
         break
     generations.append(generations[-1].next_generation(target))
-    print "Generation : %d Best Fit :%s, %s, %s" %(i, generations[-1].population.people[0].structure, generations[-1].population.people[1].structure, generations[-1].population.people[2].structure)
+    print "Generation : %d Best Fit :%s" % (iteration, generations[-1].population.people[0].structure)
+    iteration += 1
 
-print i, generations[-1].population.people[0].structure
+print iteration, generations[-1].population.people[0].structure
+
+x = xrange(iteration)
+y = [generation.population.fitness[0] for generation in generations[:-1]]
+
+plt.plot(x, y, linewidth=2.0)
+plt.xlabel('Generation Number')
+plt.ylabel('Fitness Value')
+plt.show()
