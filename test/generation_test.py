@@ -26,3 +26,10 @@ class GenerationTest(unittest.TestCase):
         generation2 = generation1.next_generation(mock_target_DNA)
         self.assertEquals(generation2.number, 2)
         self.assertEquals(generation2.population, mock_population2)
+
+    def test_generation_to_retrun_best_fit_people(self):
+        best = Mock(spec=DNA)
+        mock_population = Mock(spec=Population)
+        mock_population.best_fit = Mock(return_value=best)
+        generation = Generation(1, mock_population)
+        self.assertEquals(best, generation.best_fit())

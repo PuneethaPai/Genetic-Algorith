@@ -13,3 +13,6 @@ class Generation(object):
     def next_generation(self, target):
         next_population = self.population.next_population(target)
         return Generation(self.number + 1, next_population)
+
+    def best_fit(self):
+        return self.population.best_fit()

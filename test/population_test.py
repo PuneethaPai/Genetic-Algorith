@@ -19,9 +19,8 @@ class PopulationTest(unittest.TestCase):
         self.assertNotEqual(population, next_population)
         self.assertEqual(len(population.people), len(next_population.people))
 
-
-
-
-
-
-
+    def test_population_to_produce_best_fit(self):
+        best = DNA("asdfghjk")
+        people = [best, DNA("qwerthjk"), DNA("abcdefqw")] * 50
+        population = Population(people=people)
+        self.assertEquals(best, population.best_fit())

@@ -20,6 +20,9 @@ class Population(object):
         mutated_generation_people = self.__mutate(next_generation_people)
         return Population(mutated_generation_people)
 
+    def best_fit(self):
+        return self.people[0]
+
     def __calculate_worthiness(self, target):
         self.__calculate_fitness(target)
         self.__sort()
