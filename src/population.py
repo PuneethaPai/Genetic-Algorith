@@ -23,7 +23,7 @@ class Population(object):
     def best_fit(self):
         if self.fitness == []:
             return self.people[0], -1
-        return self.people[0], self.fitness[0]
+        return self.people[0].structure, self.fitness[0]
 
     def __calculate_worthiness(self, target):
         self.__calculate_fitness(target)

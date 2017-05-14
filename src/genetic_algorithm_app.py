@@ -29,7 +29,7 @@ class StartApp(object):
         while True:
             next_generation = self.generations[-1].next_generation(self.target)
             result.append(self.generations[-1].best_fit())
-            if result[-1][0] == self.target:
+            if result[-1][0] == target_string:
                 break
             self.generations.append(next_generation)
         return result
