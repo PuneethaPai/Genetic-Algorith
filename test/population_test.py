@@ -21,6 +21,8 @@ class PopulationTest(unittest.TestCase):
 
     def test_population_to_produce_best_fit(self):
         best = DNA("asdfghjk")
+        fitness = len(best.structure)
         people = [best, DNA("qwerthjk"), DNA("abcdefqw")] * 50
         population = Population(people=people)
-        self.assertEquals(best, population.best_fit())
+        population.next_population(best)
+        self.assertEquals((best, fitness), population.best_fit())

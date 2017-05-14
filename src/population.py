@@ -21,7 +21,7 @@ class Population(object):
         return Population(mutated_generation_people)
 
     def best_fit(self):
-        return self.people[0]
+        return self.people[0], self.fitness[0]
 
     def __calculate_worthiness(self, target):
         self.__calculate_fitness(target)
