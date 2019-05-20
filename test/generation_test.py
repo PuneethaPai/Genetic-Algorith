@@ -2,9 +2,9 @@ import unittest
 
 from mock import Mock
 
-from dna import DNA
-from generation import Generation
-from population import Population
+from src.dna import DNA
+from src.generation import Generation
+from src.population import Population
 
 
 class GenerationTest(unittest.TestCase):

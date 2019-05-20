@@ -1,10 +1,10 @@
 import string
 
 
-from dna import DNA
-from generation import Generation
-from nucleotides import Nucleotides
-from population_initialise import PopulationInitialise
+from src.dna import DNA
+from src.generation import Generation
+from src.nucleotides import Nucleotides
+from src.population_initialise import PopulationInitialise
 
 
 class StartApp(object):

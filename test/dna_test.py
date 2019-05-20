@@ -1,8 +1,8 @@
 import string
 import unittest
 
-from dna import DNA
-from nucleotides import Nucleotides
+from src.dna import DNA
+from src.nucleotides import Nucleotides
 
 
 class DNA_Test(unittest.TestCase):
@@ -38,6 +38,7 @@ class DNA_Test(unittest.TestCase):
         child2 = dna2.crossover(dna1, crossover_points)
         self.assertNotEqual(child1, child2)
         self.assertEqual(len(child1.structure), len(child2.structure))
+
 
 if __name__ == '__main__':
     unittest.main()

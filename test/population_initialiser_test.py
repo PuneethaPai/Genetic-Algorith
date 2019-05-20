@@ -1,8 +1,8 @@
 import string
 import unittest
 
-from nucleotides import Nucleotides
-from population_initialise import PopulationInitialise
+from src.nucleotides import Nucleotides
+from src.population_initialise import PopulationInitialise
 
 
 class PopulationInitialiseTest(unittest.TestCase):

@@ -1,7 +1,7 @@
 import random
 import string
 
-from nucleotides import Nucleotides
+from src.nucleotides import Nucleotides
 
 
 def generate_mutated_structure(structure, indices, mutation_values):
@@ -49,15 +49,15 @@ class DNA(object):
 
     def __generate_mutable_indices(self, percentage):
         mutate_count = self.__calculate_mutate_count(percentage)
-        mutate_indices = random.sample(xrange(len(self.structure)), mutate_count)
+        mutate_indices = random.sample(range(len(self.structure)), mutate_count)
         return mutate_indices
 
     def __calculate_mutate_count(self, percentage):
         mutate_count = len(self.structure) * percentage / 100
-        return mutate_count
+        return int(mutate_count)
 
     def __generate_crossover_points(self, crossover_points):
-        crossover_indices = random.sample(xrange(len(self.structure)), crossover_points)
+        crossover_indices = random.sample(range(len(self.structure)), crossover_points)
         crossover_indices.sort()
         return crossover_indices
 

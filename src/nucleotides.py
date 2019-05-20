@@ -19,6 +19,6 @@ class Nucleotides(object):
     def __get_space_for(self, size):
         space = list(self.nucleotides)
         multiple = size / len(self.nucleotides) + 1
-        space *= multiple
+        space *= int(multiple)
         random.shuffle(space)
         return space

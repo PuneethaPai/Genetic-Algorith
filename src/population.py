@@ -59,7 +59,7 @@ class Population(object):
         self.fitness.reverse()
 
     def __create(self, required_size, best_people):
-        required_population = [self.__child(best_people) for i in xrange(required_size)]
+        required_population = [self.__child(best_people) for i in range(required_size)]
         return required_population
 
     def __child(self, best_people):
@@ -67,7 +67,8 @@ class Population(object):
         return parents[0].crossover(parents[1])
 
     def __mutate(self, people):
-        mutable_people_index = random.sample(xrange(self.size), self.mutate_percent * self.size / 100)
+        sample_size = self.mutate_percent * self.size / 100
+        mutable_people_index = random.sample(range(self.size), int(sample_size))
         for index in mutable_people_index:
             people[index] = people[index].mutate()
         return people

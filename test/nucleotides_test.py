@@ -1,6 +1,6 @@
 import unittest
 
-from nucleotides import Nucleotides
+from src.nucleotides import Nucleotides
 
 
 class NucleotidesTest(unittest.TestCase):
@@ -11,7 +11,7 @@ class NucleotidesTest(unittest.TestCase):
         self.assertEquals(nucleotides1, nucleotides2)
         self.assertEquals(nucleotides1.__hash__(), nucleotides2.__hash__())
 
-    def test_nucleotides_with_same_space_are_equal(self):
+    def test_nucleotides_with_different_space_are_unequal(self):
         space1 = set("asdfghjk")
         space2 = set("qwertyui")
         nucleotides1 = Nucleotides(space1)

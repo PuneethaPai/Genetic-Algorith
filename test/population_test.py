@@ -1,7 +1,7 @@
 import unittest
 
-from dna import DNA
-from population import Population
+from src.dna import DNA
+from src.population import Population
 
 
 class PopulationTest(unittest.TestCase):
@@ -25,4 +25,4 @@ class PopulationTest(unittest.TestCase):
         people = [best, DNA("qwerthjk"), DNA("abcdefqw")] * 50
         population = Population(people=people)
         population.next_population(best)
-        self.assertEquals((best, fitness), population.best_fit())
+        self.assertEquals((best.structure, fitness), population.best_fit())
