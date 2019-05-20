@@ -1,0 +1,40 @@
+format_version: 4
+environments:
+  Training:
+    pipelines:
+      - ci
+pipelines:
+  ci:
+    group: AI
+    materials:
+      Genetic-Algorithm:
+        git: https://github.com/PuneethaPai/Genetic-Algorith
+        branch: master
+    stages:
+      - build:
+          jobs:
+            build:
+              resources:
+                - universal
+                - ansible
+              tasks:
+                - exec:
+                    command: ./setup.sh
+      - test:
+          jobs:
+            test:
+              resources:
+                - universal
+                - ansible
+              tasks:
+                - exec:
+                    command: python -m unittest discover -p '_test.py' -vf .
+      - dev:
+          jobs:
+            deploy:
+              resources:
+                - universal
+                - ansible
+              tasks:
+                - exec:
+                    command: python src/main.py
