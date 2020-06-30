@@ -5,7 +5,7 @@ class Generation(object):
         self.population = population
 
     def __eq__(self, other):
-        return self.number == other.number and self.population.__eq__(other)
+        return self.number == other.number and self.population.__eq__(other.population)
 
     def __hash__(self):
         return self.number.__hash__() * self.population.__hash__()

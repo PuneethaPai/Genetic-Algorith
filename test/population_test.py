@@ -9,8 +9,8 @@ class PopulationTest(unittest.TestCase):
         people = [DNA("asdfghjk"), DNA("asdfghjk")]
         population1 = Population(people=people)
         population2 = Population(people=people)
-        self.assertEquals(population1, population2)
-        self.assertEquals(population1.__hash__(), population2.__hash__())
+        self.assertEqual(population1, population2)
+        self.assertEqual(population1.__hash__(), population2.__hash__())
 
     def test_population_to_generate_improved_next_population(self):
         people = [DNA("asdfghjk"), DNA("qwerthjk"), DNA("abcdefqw")] * 50
@@ -25,4 +25,4 @@ class PopulationTest(unittest.TestCase):
         people = [best, DNA("qwerthjk"), DNA("abcdefqw")] * 50
         population = Population(people=people)
         population.next_population(best)
-        self.assertEquals((best.structure, fitness), population.best_fit())
+        self.assertEqual((best.structure, fitness), population.best_fit())

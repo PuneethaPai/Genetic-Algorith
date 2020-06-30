@@ -11,8 +11,8 @@ class DNA_Test(unittest.TestCase):
     def test_dna_with_same_structure_are_equal(self):
         dna1 = DNA("abcd")
         dna2 = DNA("abcd")
-        self.assertEquals(dna1, dna2)
-        self.assertEquals(dna1.__hash__(), dna2.__hash__())
+        self.assertEqual(dna1, dna2)
+        self.assertEqual(dna1.__hash__(), dna2.__hash__())
 
     def test_dna_with_different_structure_are_not_equal(self):
         dna2 = DNA("abcde")
@@ -28,7 +28,7 @@ class DNA_Test(unittest.TestCase):
         dna = DNA("asdfghjkzxcvbnm")
         mutated_dna = dna.mutate(20, self.nucleotides)
         self.assertNotEqual(dna, mutated_dna)
-        self.assertEquals(len(dna.structure), len(mutated_dna.structure))
+        self.assertEqual(len(dna.structure), len(mutated_dna.structure))
 
     def test_dna_crossover(self):
         dna1 = DNA("asdfghjkl")

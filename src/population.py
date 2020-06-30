@@ -52,15 +52,13 @@ class Population(object):
         return collections.Counter(self.people)
 
     def __sort(self):
-        fitness_based = sorted(zip(self.fitness, self.people))
-        self.people = [item[1] for item in fitness_based]
-        self.fitness = [item[0] for item in fitness_based]
-        self.people.reverse()
-        self.fitness.reverse()
+        fitness_based = sorted(
+            zip(self.fitness, self.people), key=lambda tup: tup[0], reverse=True
+        )
+        self.fitness, self.people = [list(x) for x in list(zip(*fitness_based))]
 
     def __create(self, required_size, best_people):
-        required_population = [self.__child(best_people) for i in range(required_size)]
-        return required_population
+        return [self.__child(best_people) for i in range(required_size)]
 
     def __child(self, best_people):
         parents = random.sample(best_people, 2)

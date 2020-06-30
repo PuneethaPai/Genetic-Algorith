@@ -10,4 +10,4 @@ class PopulationInitialiseTest(unittest.TestCase):
         nucleotides = Nucleotides(set(string.printable))
         population_initialise = PopulationInitialise(nucleotides)
         population = population_initialise.create(population_size=10, structure_size=500)
-        self.assertEquals(population.size, 10)
+        self.assertEqual(population.size, 10)

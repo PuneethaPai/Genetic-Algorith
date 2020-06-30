@@ -8,8 +8,8 @@ class NucleotidesTest(unittest.TestCase):
         space = set("asdfghjk")
         nucleotides1 = Nucleotides(space)
         nucleotides2 = Nucleotides(space)
-        self.assertEquals(nucleotides1, nucleotides2)
-        self.assertEquals(nucleotides1.__hash__(), nucleotides2.__hash__())
+        self.assertEqual(nucleotides1, nucleotides2)
+        self.assertEqual(nucleotides1.__hash__(), nucleotides2.__hash__())
 
     def test_nucleotides_with_different_space_are_unequal(self):
         space1 = set("asdfghjk")
@@ -23,13 +23,13 @@ class NucleotidesTest(unittest.TestCase):
         space = set("asdfghjkiytfvygjmv")
         nucleotides = Nucleotides(space)
         structure = nucleotides.create(size=10)
-        self.assertEquals(len(structure), 10)
+        self.assertEqual(len(structure), 10)
 
     def test_nucleotides_generate_structure_greater_than_available_space(self):
         space = set("asdfghj")
         nucleotides = Nucleotides(space)
         structure = nucleotides.create(size=10)
-        self.assertEquals(len(structure), 10)
+        self.assertEqual(len(structure), 10)
 
 if __name__ == '__main__':
     unittest.main()
